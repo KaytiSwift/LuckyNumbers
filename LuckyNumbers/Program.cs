@@ -30,17 +30,20 @@ namespace LuckyNumbers
                 {
                     Console.WriteLine("Please enter a number.");
                     int input = int.Parse(Console.ReadLine());
-                    if (userNums.Contains(input) == true)
+                    if ((userNums.Contains(input) == false) && (input >= min) && (input <= max))
                     {
-                        Console.WriteLine("You already guessed that number. Please try again");
-                        i--;                        
+                        userNums[i] = input;
                     }
-                    if ((input < min) || (input > max))
+                    else if (userNums.Contains(input)== true)
+                    {
+                        Console.WriteLine("You already guessed that number. Please try again.");
+                        i--;
+                    }
+                    else if ((input < min) || (input > max))
                     {
                         Console.WriteLine("Please enter a valid number within your minimum and maximum number range.");
                         i--;
                     }
-                    userNums[i] = input;
                 }
 
                 //creates a new int array with 6 elements
