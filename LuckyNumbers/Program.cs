@@ -43,6 +43,48 @@ namespace LuckyNumbers
                     userNums[i] = input;
                 }
 
+                //creates a new int array with 6 elements
+                int[] luckyNums = new int[6];
+
+                //instantiates an instance of the Random class called rand
+                Random rand = new Random();
+
+                //lucky number generator that checks for duplicates, checks guessed numbers for matches to lucky numbers, and assigns to luckyNums array
+                int guesses = 0;
+                for (int i = 0; i < luckyNums.Length; i++)
+                {
+                    int index = rand.Next(min, max);
+                    
+                    if (luckyNums.Contains(index) == false)
+                    {
+                        luckyNums[i] = index;
+                        if (userNums.Contains(index))
+                        {
+                            guesses++;
+                        }
+                    }
+                    else
+                    {
+                        i--;
+                    }
+                }
+
+                //displays the lucky numbers to the user
+                Console.WriteLine("You're lucky numbers are:");
+                foreach (int num in luckyNums)
+                {
+                    Console.WriteLine("Lucky Number: " + num);
+                }
+                
+                //displays to the user the number of numbers they guessed correctly
+                Console.WriteLine("You have guessed {0} numbers correctly!", guesses);
+
+                //calculates winnings and displays to the user the amount they have won from the jackpot
+                double jackpot = 2000000;
+                double winnings = jackpot / guesses;
+
+                Console.WriteLine("You have won ${0}!", winnings);
+
                 //asks the user if they want to play again or quit and exits if they want to quit
                 Console.WriteLine("Do you want to play again? Enter yes or no.");
                 string response = Console.ReadLine().ToLower();
@@ -51,6 +93,7 @@ namespace LuckyNumbers
                 {
                     redo = false;
                 }
+
             } while (redo == true);
         }//main
     }//class
